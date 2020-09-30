@@ -5,8 +5,6 @@
       type='search'
       placeholder='Entrez une ville...'
     ></b-form-input>
-    <input type="text" v-bind="this.inputCity">
-    <div class='mt-2'>{{ this.$store.getters.userCityInput }}</div>
   </div>
 </template>
 

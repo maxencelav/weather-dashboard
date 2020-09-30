@@ -2,7 +2,7 @@
   <b-container>
     <b-row class="vh-90" align-v="center">
       <b-col sm='12'><CitySearch></CitySearch> </b-col>
-      <b-col ><CityDisplay city='Cergy'></CityDisplay></b-col>
+      <b-col ><CityDisplay :city="currentCity"></CityDisplay></b-col>
     </b-row>
   </b-container>
 </template>
@@ -14,9 +14,16 @@ import CityDisplay from '@/components/CityDisplay.vue'
 
 export default {
   name: 'Home',
+  data () {
+    return {
+      // city gets automatically loaded ONLY on page load
+      currentCity: this.$store.getters.userCityInput
+    }
+  },
   components: {
     CitySearch,
     CityDisplay
   }
+
 }
 </script>

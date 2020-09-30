@@ -5,10 +5,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    userCityInput: String
+    userCityInput: ''
   },
   getters: {
-    userCityInput: state => state.name
+    userCityInput: state => state.userCityInput
   },
   mutations: {
     changeCity (state, city) {
