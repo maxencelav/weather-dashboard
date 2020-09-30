@@ -5,7 +5,7 @@
       <div class="card-body">
         <b-row align-h="between">
           <b-col sm="1" class="mr-4">
-                        <b-img :src='"http://openweathermap.org/img/wn/" + weatherData.weather[0].icon + "@2x.png"' alt="Icône de la météo"></b-img>
+                        <b-img :src='"https://openweathermap.org/img/wn/" + weatherData.weather[0].icon + "@2x.png"' alt="Icône de la météo"></b-img>
 
           </b-col>
           <b-col class="d-block">
