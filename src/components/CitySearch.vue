@@ -2,23 +2,26 @@
   <div>
     <b-form-input
       v-model="inputCity"
-      type="search"
-      placeholder="Entrez une ville..."
+      type='search'
+      placeholder='Entrez une ville...'
     ></b-form-input>
-    <div class="mt-2">Value: {{ inputCity }}</div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'CitySearch',
-  data () {
-    return {
-      inputCity: 'Cergy'
+  computed: {
+    inputCity: {
+      get () {
+        return this.$store.getters.userCityInput
+      },
+      set (city) {
+        this.$store.commit('changeCity', city)
+      }
     }
   }
 }
 </script>
 
-<style>
-</style>
+<style></style>
