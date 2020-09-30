@@ -14,6 +14,8 @@ Vue.use(IconsPlugin)
 
 Vue.use(AsyncComputed)
 
+Vue.use('vue-moment')
+
 Vue.config.productionTip = false
 
 new Vue({
