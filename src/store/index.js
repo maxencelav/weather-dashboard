@@ -5,11 +5,14 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    userCityInput: ''
+  },
+  getters: {
+    userCityInput: state => state.userCityInput
   },
   mutations: {
-  },
-  actions: {
-  },
-  modules: {
+    changeCity (state, city) {
+      state.userCityInput = city
+    }
   }
 })
