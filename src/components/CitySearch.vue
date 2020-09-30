@@ -1,10 +1,11 @@
 <template>
   <div>
     <b-form-input
-      v-model="inputCity"
+      v-model='inputCity'
       type='search'
       placeholder='Entrez une ville...'
     ></b-form-input>
+    <b-button @click="updateSearchStore"> <b-icon-search></b-icon-search></b-button>
   </div>
 </template>
 
@@ -17,8 +18,18 @@ export default {
         return this.$store.getters.userCityInput
       },
       set (city) {
-        this.$store.commit('changeCity', city)
+        this.tempCity = city
       }
+    }
+  },
+  data () {
+    return {
+      tempCity: ''
+    }
+  },
+  methods: {
+    updateSearchStore () {
+      this.$store.commit('changeCity', this.tempCity)
     }
   }
 }
