@@ -51,7 +51,7 @@ export default {
       get () {
         return axios
           .get(
-            'http://api.openweathermap.org/data/2.5/weather?q=' +
+            'https://api.openweathermap.org/data/2.5/weather?q=' +
               this.city +
               '&lang=fr&units=metric&appid=3ac7d8e51905929ee0a5e1c9695e280f'
           )
