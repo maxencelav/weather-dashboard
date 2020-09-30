@@ -1,14 +1,18 @@
 <template>
-  <div>
+  <b-input-group>
     <b-form-input
-      v-model='inputCity'
-      type='search'
-      placeholder='Entrez une ville...'
+      v-model="inputCity"
+      type="search"
+      placeholder="Entrez une ville..."
       @keypress.enter="updateSearchStore"
       @blur="updateSearchStore"
     ></b-form-input>
-    <b-button @click="updateSearchStore"> <b-icon-search></b-icon-search></b-button>
-  </div>
+    <b-input-group-append>
+      <b-button block variant="primary" @click="updateSearchStore">
+        Rechercher <b-icon-search class="ml-2"></b-icon-search>
+      </b-button>
+    </b-input-group-append>
+  </b-input-group>
 </template>
 
 <script>
