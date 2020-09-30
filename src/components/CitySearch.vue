@@ -4,6 +4,8 @@
       v-model='inputCity'
       type='search'
       placeholder='Entrez une ville...'
+      @keypress.enter="updateSearchStore"
+      @blur="updateSearchStore"
     ></b-form-input>
     <b-button @click="updateSearchStore"> <b-icon-search></b-icon-search></b-button>
   </div>
