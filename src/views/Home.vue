@@ -1,18 +1,20 @@
 <template>
-  <b-container fluid="md">
-    <b-row class="align-content-center">
-      <b-col sm="12">
-        <h1>Météo</h1>
-        <p class="lead">
-          Récupérez les données météo du lieu que vous souhaitez, et affichez jusqu'à 10 lieux simultanément.
-        </p>
-      </b-col>
-      <b-col sm="12"><CitySearch></CitySearch></b-col>
-      <b-col sm="12" class="mt-4"
-        ><CityDisplay :city="currentCity"></CityDisplay
-      ></b-col>
-    </b-row>
-  </b-container>
+  <div>
+    <b-jumbotron
+      header="Météo"
+      lead="Récupérez les données météo du lieu que vous souhaitez, et affichez
+            jusqu'à 10 lieux simultanément."
+    >
+    </b-jumbotron>
+    <b-container fluid="md">
+      <b-row class="align-content-center">
+        <b-col sm="12"><CitySearch></CitySearch></b-col>
+        <b-col sm="12" class="mt-4"
+          ><CityDisplay :city="currentCity"></CityDisplay
+        ></b-col>
+      </b-row>
+    </b-container>
+  </div>
 </template>
 
 <script>
