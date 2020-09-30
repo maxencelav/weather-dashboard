@@ -5,11 +5,14 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import AsyncComputed from 'vue-async-computed'
 
 // Install BootstrapVue
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
+
+Vue.use(AsyncComputed)
 
 Vue.config.productionTip = false
 
