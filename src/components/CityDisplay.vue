@@ -27,7 +27,7 @@
                 Récupéré le {{ city.dt | filterTime }}
               </small>
               <div class="text-right">
-                <b-button :to="'/details/' + this.city">Détails</b-button>
+                <b-button :to="'/details/' + city.name">Détails</b-button>
               </div>
             </b-row>
           </p>
