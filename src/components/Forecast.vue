@@ -1,10 +1,10 @@
 <template>
   <div>
     <b-table
+      small
       ref="table"
       :items="items"
       :fields="fields"
-      sort-by="hour"
       head-variant="light"
       class="mt-5"
     ></b-table>
@@ -23,71 +23,31 @@ export default {
     return {
       fields: [
         {
-          key: 'hour',
-          label: 'Heure',
-          sortable: true
+          key: 'time',
+          label: 'Heure'
         },
         {
-          key: 'day1',
-          label: moment().locale('fr').format('Do MMMM')
+          key: 'temperature',
+          label: 'Température'
         },
         {
-          key: 'day2',
-          label: moment().locale('fr').add(1, 'd').format('Do MMMM')
+          key: 'highlow',
+          label: 'Extrêmes'
         },
         {
-          key: 'day3',
-          label: moment().locale('fr').add(2, 'd').format('Do MMMM')
+          key: 'status',
+          label: 'État'
         },
         {
-          key: 'day4',
-          label: moment().locale('fr').add(3, 'd').format('Do MMMM')
-        },
-        {
-          key: 'day5',
-          label: moment().locale('fr').add(4, 'd').format('Do MMMM')
+          key: 'humidity',
+          label: 'Humidité'
         }
       ],
       items: []
     }
   },
-  methods: {
-    formatWeather (source, index) {
-      console.log(source.list[index])
-      return (
-        source.list[index].main.temp +
-        '°C • ' +
-        source.list[index].weather[0].description
-      )
-    }
-  },
-  filters: {
-    filterHour: function (value) {
-      if (value) {
-        return moment(Date(value)).locale('fr').format('HH') + 'h'
-      }
-    }
-  },
-  watch: {
-    weatherData: function (value, oldValue) {
-      for (let index = 0; index < 7; index++) {
-        this.items.push({
-          isActive: true,
-          hour:
-            moment(value.list[index].dt * 1000)
-              .locale('fr')
-              .format('HH') + 'h',
-          day1: this.formatWeather(value, index),
-          day2: this.formatWeather(value, index + 7),
-          day3: this.formatWeather(value, +7 * 2),
-          day4: this.formatWeather(value, +7 * 3),
-          day5: this.formatWeather(value, +7 * 4)
-        })
-      }
-
-      this.$refs.table.refresh()
-    }
-  },
+  methods: {},
+  filters: {},
   asyncComputed: {
     weatherData: {
       get () {
@@ -97,7 +57,19 @@ export default {
               this.city +
               '&lang=fr&units=metric&appid=3ac7d8e51905929ee0a5e1c9695e280f'
           )
-          .then((response) => response.data)
+          .then((response) => {
+            const result = response.data.list
+            result.forEach((item) =>
+              this.items.push({
+                time: moment(item.dt_txt).locale('fr').format('dddd DD MMM à HH') + 'h',
+                humidity: item.main.humidity + '%',
+                highlow: item.main.temp_min + ' - ' + item.main.temp_max,
+                temperature: item.main.temp + '°C',
+                status: item.weather[0].description
+              })
+            )
+            this.cityForecast.push(response.data.list)
+          })
       },
       default () {
         return 'Chargement...'
