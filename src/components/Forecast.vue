@@ -6,6 +6,7 @@
       :fields="fields"
       sort-by="hour"
       head-variant="light"
+      class="mt-5"
     ></b-table>
   </div>
 </template>
