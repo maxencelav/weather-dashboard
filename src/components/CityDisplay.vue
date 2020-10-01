@@ -41,7 +41,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import moment from 'moment'
 
 export default {
@@ -55,19 +54,13 @@ export default {
       }
     }
   },
-  asyncComputed: {
+  computed: {
     weatherData: {
       get () {
-        return axios
-          .get(
-            'https://api.openweathermap.org/data/2.5/weather?q=' +
-              this.city +
-              '&lang=fr&units=metric&appid=3ac7d8e51905929ee0a5e1c9695e280f'
-          )
-          .then((response) => response.data)
+        return this.$store.state.dataWeather
       },
-      default () {
-        return 'Chargement...'
+      set (value) {
+        this.$store.commit('addData', value)
       }
     }
   }

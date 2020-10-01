@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import './assets/scss/custom.scss'
-import vuetwemoji from 'vue-twemoji'
+import { LMap, LTileLayer, LMarker } from 'vue2-leaflet'
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -16,7 +16,11 @@ Vue.use(AsyncComputed)
 
 Vue.use('vue-moment')
 
-Vue.use(vuetwemoji)
+Vue.use(LMap)
+
+Vue.use(LTileLayer)
+
+Vue.use(LMarker)
 
 Vue.config.productionTip = false
 

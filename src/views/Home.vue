@@ -21,6 +21,7 @@
 // @ is an alias to /src
 import CitySearch from '@/components/CitySearch.vue'
 import CityDisplay from '@/components/CityDisplay.vue'
+import axios from 'axios'
 
 export default {
   name: 'Home',
@@ -40,6 +41,23 @@ export default {
   components: {
     CitySearch,
     CityDisplay
+  },
+
+  asyncComputed: {
+    weatherData: {
+      get () {
+        return axios
+          .get(
+            'https://api.openweathermap.org/data/2.5/weather?q=' + this.$store.getters.userCityInput + '&lang=fr&units=metric&appid=3ac7d8e51905929ee0a5e1c9695e280f'
+          )
+          .then((response) => {
+            this.$store.commit('addData', response.data)
+          })
+      },
+      default () {
+        return 'Chargement...'
+      }
+    }
   }
 }
 </script>
