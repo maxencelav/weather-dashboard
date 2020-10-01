@@ -1,7 +1,7 @@
 <template>
   <div class="weather">
-    <b-card no-body>
-      <div class="card-header">Votre recherche : <code>{{this.city}}</code></div>
+    <b-card no-body v-for="city in this.cityList" :key="city" >
+      <div class="card-header">Votre recherche : <code>{{city}}</code></div>
       <div class="card-body">
         <b-row align-h="between">
           <b-col sm="1" class="mr-4">
@@ -37,7 +37,8 @@ import moment from 'moment'
 
 export default {
   props: {
-    city: String
+    // city: String
+    cityList: Array
   },
   filters: {
     filterTime: function (value) {
@@ -52,7 +53,7 @@ export default {
         return axios
           .get(
             'https://api.openweathermap.org/data/2.5/weather?q=' +
-              this.city +
+              this.cityList +
               '&lang=fr&units=metric&appid=3ac7d8e51905929ee0a5e1c9695e280f'
           )
           .then((response) => response.data)

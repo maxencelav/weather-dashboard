@@ -40,16 +40,13 @@ export default {
       this.addToList()
     },
     addToList () {
-      if (!this.tempList.includes(this.tempCity)) {
-        if (this.tempList.length === 9) {
-          this.tempList.shift()
+      if (!this.tempList.includes(this.tempCity)) { // Check if the city is already in the list
+        if (this.tempList.length === 9) { // Check the limit of 9 city
+          this.tempList.shift() // Delete the first one
         }
-        this.tempList.push(this.tempCity.toLowerCase())
-        this.$store.commit('addCityToList', this.tempList)
+        this.tempList.push(this.tempCity.toLowerCase()) // Add the new city
+        this.$store.commit('addCityToList', this.tempList) // Send to the store
       }
-      // if (this.tempList.length === 9) {
-      // }
-      // this.tempList = [...new Set(this.tempList)]
     }
   }
 }

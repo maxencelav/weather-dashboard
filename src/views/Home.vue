@@ -10,7 +10,7 @@
       <b-row class="align-content-center">
         <b-col sm="12"><CitySearch></CitySearch></b-col>
         <b-col sm="12" class="mt-4"
-          ><CityDisplay :city="currentCity"></CityDisplay
+          ><CityDisplay :cityList="currentCityList"></CityDisplay
         ></b-col>
       </b-row>
     </b-container>
@@ -28,6 +28,11 @@ export default {
     currentCity: {
       get () {
         return this.$store.getters.userCityInput
+      }
+    },
+    currentCityList: {
+      get () {
+        return this.$store.getters.cityList
       }
     }
   },
