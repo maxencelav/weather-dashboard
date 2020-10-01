@@ -9,13 +9,10 @@
 
           </b-col>
           <b-col class="d-block">
-            <h2>{{ weatherData.name }}</h2>
-            <p>{{ weatherData.weather[0].description }}</p>
-            <p class="card-text">
-              <small class="text-muted">
-                Récupéré le {{ weatherData.dt | filterTime }}
-              </small>
-            </p>
+            <h2>{{ weatherData.name }} <b-badge>{{ weatherData.sys.country }}</b-badge></h2>
+            <p>{{ weatherData.weather[0].description }} • humidité: {{ weatherData.main.humidity }}% <b-icon v-if="weatherData.main.humidity <= 20" icon="droplet"></b-icon>
+              <b-icon v-else-if="weatherData.main.humidity > 20 && weatherData.main.humidity < 90" icon="droplet-half"></b-icon>
+              <b-icon v-else-if="weatherData.main.humidity >= 90" icon="droplet-fill"></b-icon></p>
           </b-col>
           <b-col class="text-right d-block">
             <h2>{{ weatherData.main.temp }}°C</h2>
@@ -24,6 +21,18 @@
             </p>
           </b-col>
         </b-row>
+        <b-container>
+          <p class="card-text">
+            <b-row align-h="between" align-v="center">
+              <small class="text-muted ml-3">
+                Récupéré le {{ weatherData.dt | filterTime }}
+              </small>
+              <!-- <div class="text-right">
+                <b-button to="/detail">Détails</b-button>
+              </div> -->
+            </b-row>
+          </p>
+        </b-container>
       </div>
     </b-card>
 
@@ -32,7 +41,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import moment from 'moment'
 
 export default {
@@ -47,19 +55,13 @@ export default {
       }
     }
   },
-  asyncComputed: {
+  computed: {
     weatherData: {
       get () {
-        return axios
-          .get(
-            'https://api.openweathermap.org/data/2.5/weather?q=' +
-              this.cityList +
-              '&lang=fr&units=metric&appid=3ac7d8e51905929ee0a5e1c9695e280f'
-          )
-          .then((response) => response.data)
+        return this.$store.state.dataWeather
       },
-      default () {
-        return 'Chargement...'
+      set (value) {
+        this.$store.commit('addData', value)
       }
     }
   }
