@@ -40,7 +40,7 @@ export default {
       this.addToList()
     },
     addToList () {
-      if (!this.tempList.includes(this.tempCity)) { // Check if the city is already in the list
+      if (!this.tempList.includes(this.tempCity.toLowerCase())) { // Check if the city is already in the list
         if (this.tempList.length === 9) { // Check the limit of 9 city
           this.tempList.shift() // Delete the first one
         }

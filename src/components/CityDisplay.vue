@@ -1,23 +1,22 @@
 <template>
   <div class="weather">
-    <b-card no-body v-for="city in this.cityList" :key="city" >
-      <div class="card-header">Votre recherche : <code>{{city}}</code></div>
+    <b-card no-body v-for="(city, index) in weatherData" :key="index" >
+      <div class="card-header">Votre recherche : <code>{{city.name}}</code></div>
       <div class="card-body">
         <b-row align-h="between">
           <b-col sm="1" class="mr-4">
-                        <b-img :src='"https://openweathermap.org/img/wn/" + weatherData.weather[0].icon + "@2x.png"' alt="Icône de la météo"></b-img>
-
+                         <b-img :src='"https://openweathermap.org/img/wn/" + city.weather[0].icon + "@2x.png"' alt="Icône de la météo"></b-img>
           </b-col>
           <b-col class="d-block">
-            <h2>{{ weatherData.name }} <b-badge>{{ weatherData.sys.country }}</b-badge></h2>
-            <p>{{ weatherData.weather[0].description }} • humidité: {{ weatherData.main.humidity }}% <b-icon v-if="weatherData.main.humidity <= 20" icon="droplet"></b-icon>
-              <b-icon v-else-if="weatherData.main.humidity > 20 && weatherData.main.humidity < 90" icon="droplet-half"></b-icon>
-              <b-icon v-else-if="weatherData.main.humidity >= 90" icon="droplet-fill"></b-icon></p>
+            <h2>{{ city.name }} <b-badge>{{ city.sys.country }}</b-badge></h2>
+            <p> {{ city.weather[0].description }} • humidité: {{ city.main.humidity }}% <b-icon v-if="city.main.humidity <= 20" icon="droplet"></b-icon>
+              <b-icon v-else-if="city.main.humidity > 20 && city.main.humidity < 90" icon="droplet-half"></b-icon>
+              <b-icon v-else-if="city.main.humidity >= 90" icon="droplet-fill"></b-icon></p>
           </b-col>
           <b-col class="text-right d-block">
-            <h2>{{ weatherData.main.temp }}°C</h2>
+            <h2>{{ city.main.temp }}°C</h2>
             <p style="font-style: italic">
-              {{ weatherData.main.temp_max }}°C <b-icon icon="arrow-up-right"></b-icon> | {{ weatherData.main.temp_min }}°C <b-icon icon="arrow-down-right"></b-icon>
+              {{ city.main.temp_max }}°C <b-icon icon="arrow-up-right"></b-icon> | {{ city.main.temp_min }}°C <b-icon icon="arrow-down-right"></b-icon>
             </p>
           </b-col>
         </b-row>
@@ -25,18 +24,16 @@
           <p class="card-text">
             <b-row align-h="between" align-v="center">
               <small class="text-muted ml-3">
-                Récupéré le {{ weatherData.dt | filterTime }}
+                Récupéré le {{ city.dt | filterTime }}
               </small>
-              <!-- <div class="text-right">
+              <div class="text-right">
                 <b-button to="/detail">Détails</b-button>
-              </div> -->
+              </div>
             </b-row>
           </p>
         </b-container>
       </div>
     </b-card>
-
-   <!-- <p>{{ weatherData }}</p>-->
   </div>
 </template>
 
@@ -59,10 +56,8 @@ export default {
     weatherData: {
       get () {
         return this.$store.state.dataWeather
-      },
-      set (value) {
-        this.$store.commit('addData', value)
       }
+
     }
   }
 }

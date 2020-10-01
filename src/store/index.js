@@ -7,7 +7,7 @@ export default new Vuex.Store({
   state: {
     userCityInput: '',
     cityList: [],
-    dataWeather: {}
+    dataWeather: []
   },
   getters: {
     userCityInput: state => state.userCityInput,
@@ -22,7 +22,7 @@ export default new Vuex.Store({
       state.cityList = cityList
     },
     addData (state, data) {
-      state.dataWeather = data
+      state.dataWeather.push(data)
     }
   }
 })
