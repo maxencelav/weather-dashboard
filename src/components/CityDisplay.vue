@@ -4,7 +4,7 @@
       <div class="card-header">Votre recherche : <code>{{city.name}}</code></div>
       <div class="card-body">
         <b-row align-h="between">
-          <b-col sm="1" class="mr-4">
+          <b-col sm="auto">
                          <b-img :src='"https://openweathermap.org/img/wn/" + city.weather[0].icon + "@2x.png"' alt="Icône de la météo"></b-img>
           </b-col>
           <b-col class="d-block">
