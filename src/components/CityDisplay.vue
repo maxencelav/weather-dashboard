@@ -28,7 +28,7 @@
                 Récupéré le {{ weatherData.dt | filterTime }}
               </small>
               <div class="text-right">
-                <b-button to="/details">Détails</b-button>
+                <b-button :to="'/details/' + this.city">Détails</b-button>
               </div>
             </b-row>
           </p>

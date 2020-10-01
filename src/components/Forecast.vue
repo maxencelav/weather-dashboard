@@ -2,13 +2,11 @@
   <div>
     <b-table
       ref="table"
-      striped
-      hover
       :items="items"
       :fields="fields"
       sort-by="hour"
+      head-variant="light"
     ></b-table>
-    <b-button @click="fillTable(weatherData)">Today</b-button>
   </div>
 </template>
 
@@ -17,9 +15,11 @@ import moment from 'moment'
 import axios from 'axios'
 
 export default {
+  props: {
+    city: String
+  },
   data () {
     return {
-      city: 'Londres',
       fields: [
         {
           key: 'hour',
@@ -51,8 +51,13 @@ export default {
     }
   },
   methods: {
-    fillTable (dataWeather) {
-
+    formatWeather (source, index) {
+      console.log(source.list[index])
+      return (
+        source.list[index].main.temp +
+        '°C • ' +
+        source.list[index].weather[0].description
+      )
     }
   },
   filters: {
@@ -64,11 +69,6 @@ export default {
   },
   watch: {
     weatherData: function (value, oldValue) {
-      console.log(value.list[1].dt)
-      console.log(
-        moment(Date(value.list[1].dt)).locale('fr').format('LLLL')
-      )
-
       this.items = [
         {
           isActive: true,
@@ -76,11 +76,11 @@ export default {
             moment(value.list[0].dt * 1000)
               .locale('fr')
               .format('HH') + 'h',
-          day1: value.list[0].main.temp,
-          day2: value.list[8].main.temp,
-          day3: value.list[16].main.temp,
-          day4: value.list[24].main.temp,
-          day5: value.list[32].main.temp
+          day1: this.formatWeather(value, 0),
+          day2: this.formatWeather(value, 8),
+          day3: this.formatWeather(value, 16),
+          day4: this.formatWeather(value, 24),
+          day5: this.formatWeather(value, 32)
         },
         {
           isActive: true,
@@ -88,11 +88,11 @@ export default {
             moment(value.list[1].dt * 1000)
               .locale('fr')
               .format('HH') + 'h',
-          day1: value.list[1].main.temp,
-          day2: value.list[9].main.temp,
-          day3: value.list[17].main.temp,
-          day4: value.list[25].main.temp,
-          day5: value.list[33].main.temp
+          day1: this.formatWeather(value, 1),
+          day2: this.formatWeather(value, 9),
+          day3: this.formatWeather(value, 17),
+          day4: this.formatWeather(value, 25),
+          day5: this.formatWeather(value, 33)
         },
         {
           isActive: true,
@@ -100,11 +100,23 @@ export default {
             moment(value.list[2].dt * 1000)
               .locale('fr')
               .format('HH') + 'h',
-          day1: value.list[2].main.temp,
-          day2: value.list[10].main.temp,
-          day3: value.list[18].main.temp,
-          day4: value.list[26].main.temp,
-          day5: value.list[34].main.temp
+          day1: this.formatWeather(value, 2),
+          day2: this.formatWeather(value, 10),
+          day3: this.formatWeather(value, 18),
+          day4: this.formatWeather(value, 26),
+          day5: this.formatWeather(value, 34)
+        },
+        {
+          isActive: true,
+          hour:
+            moment(value.list[2].dt * 1000)
+              .locale('fr')
+              .format('HH') + 'h',
+          day1: this.formatWeather(value, 3),
+          day2: this.formatWeather(value, 11),
+          day3: this.formatWeather(value, 19),
+          day4: this.formatWeather(value, 27),
+          day5: this.formatWeather(value, 35)
         },
         {
           isActive: true,
@@ -112,11 +124,11 @@ export default {
             moment(value.list[3].dt * 1000)
               .locale('fr')
               .format('HH') + 'h',
-          day1: value.list[3].main.temp,
-          day2: value.list[11].main.temp,
-          day3: value.list[19].main.temp,
-          day4: value.list[27].main.temp,
-          day5: value.list[35].main.temp
+          day1: this.formatWeather(value, 4),
+          day2: this.formatWeather(value, 12),
+          day3: this.formatWeather(value, 20),
+          day4: this.formatWeather(value, 28),
+          day5: this.formatWeather(value, 36)
         },
         {
           isActive: true,
@@ -124,11 +136,11 @@ export default {
             moment(value.list[4].dt * 1000)
               .locale('fr')
               .format('HH') + 'h',
-          day1: value.list[4].main.temp,
-          day2: value.list[12].main.temp,
-          day3: value.list[20].main.temp,
-          day4: value.list[28].main.temp,
-          day5: value.list[36].main.temp
+          day1: this.formatWeather(value, 5),
+          day2: this.formatWeather(value, 13),
+          day3: this.formatWeather(value, 21),
+          day4: this.formatWeather(value, 29),
+          day5: this.formatWeather(value, 37)
         },
         {
           isActive: true,
@@ -136,11 +148,11 @@ export default {
             moment(value.list[5].dt * 1000)
               .locale('fr')
               .format('HH') + 'h',
-          day1: value.list[5].main.temp,
-          day2: value.list[13].main.temp,
-          day3: value.list[21].main.temp,
-          day4: value.list[29].main.temp,
-          day5: value.list[37].main.temp
+          day1: this.formatWeather(value, 6),
+          day2: this.formatWeather(value, 14),
+          day3: this.formatWeather(value, 22),
+          day4: this.formatWeather(value, 30),
+          day5: this.formatWeather(value, 38)
         },
         {
           isActive: true,
@@ -148,23 +160,11 @@ export default {
             moment(value.list[6].dt * 1000)
               .locale('fr')
               .format('HH') + 'h',
-          day1: value.list[6].main.temp,
-          day2: value.list[14].main.temp,
-          day3: value.list[22].main.temp,
-          day4: value.list[30].main.temp,
-          day5: value.list[38].main.temp
-        },
-        {
-          isActive: true,
-          hour:
-            moment(value.list[7].dt * 1000)
-              .locale('fr')
-              .format('HH') + 'h',
-          day1: value.list[7].main.temp,
-          day2: value.list[15].main.temp,
-          day3: value.list[23].main.temp,
-          day4: value.list[31].main.temp,
-          day5: value.list[39].main.temp
+          day1: this.formatWeather(value, 7),
+          day2: this.formatWeather(value, 15),
+          day3: this.formatWeather(value, 23),
+          day4: this.formatWeather(value, 31),
+          day5: this.formatWeather(value, 39)
         }
       ]
       this.$refs.table.refresh()
@@ -175,7 +175,9 @@ export default {
       get () {
         return axios
           .get(
-            'https://api.openweathermap.org/data/2.5/forecast?q=London&lang=fr&units=metric&appid=3ac7d8e51905929ee0a5e1c9695e280f'
+            'https://api.openweathermap.org/data/2.5/forecast?q=' +
+              this.city +
+              '&lang=fr&units=metric&appid=3ac7d8e51905929ee0a5e1c9695e280f'
           )
           .then((response) => response.data)
       },

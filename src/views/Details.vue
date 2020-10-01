@@ -1,6 +1,6 @@
 <template>
-  <b-jumbotron header="Détails de XXX">
-    <Forecast></Forecast>
+  <b-jumbotron :header="'Détails de ' + this.$route.params.city">
+    <Forecast :city="this.$route.params.city" ></Forecast>
   </b-jumbotron>
 </template>
 
