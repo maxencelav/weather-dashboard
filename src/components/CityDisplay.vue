@@ -1,22 +1,45 @@
 <template>
   <div class="weather">
-    <b-card no-body v-for="(city, index) in weatherData" :key="index" >
-      <div class="card-header">Votre recherche : <code>{{city.name}}</code></div>
+    <b-card no-body v-for="(city, index) in weatherData" :key="index">
+      <div class="card-header">
+        Votre recherche : <code>{{ city.name }}</code>
+      </div>
       <div class="card-body">
         <b-row align-h="between">
           <b-col sm="auto">
-                         <b-img :src='"https://openweathermap.org/img/wn/" + city.weather[0].icon + "@2x.png"' alt="Icône de la météo"></b-img>
+            <b-img
+              :src="'https://openweathermap.org/img/wn/' + city.weather[0].icon + '@2x.png'"
+              alt="Icône de la météo"
+            ></b-img>
           </b-col>
           <b-col class="d-block">
-            <h2>{{ city.name }} <b-badge>{{ city.sys.country }}</b-badge></h2>
-            <p> {{ city.weather[0].description }} • humidité: {{ city.main.humidity }}% <b-icon v-if="city.main.humidity <= 20" icon="droplet"></b-icon>
-              <b-icon v-else-if="city.main.humidity > 20 && city.main.humidity < 90" icon="droplet-half"></b-icon>
-              <b-icon v-else-if="city.main.humidity >= 90" icon="droplet-fill"></b-icon></p>
+            <h2>
+              {{ city.name }} <b-badge>{{ city.sys.country }}</b-badge>
+            </h2>
+            <p>
+              {{ city.weather[0].description }} • Humidité :
+              {{ city.main.humidity }}%
+              <b-icon
+                v-if="city.main.humidity <= 20"
+                icon="droplet"
+              ></b-icon>
+              <b-icon
+                v-else-if="city.main.humidity > 20 && city.main.humidity < 90"
+                icon="droplet-half"
+              ></b-icon>
+              <b-icon
+                v-else-if="city.main.humidity >= 90"
+                icon="droplet-fill"
+              ></b-icon>
+            </p>
           </b-col>
           <b-col class="text-right d-block">
             <h2>{{ city.main.temp }}°C</h2>
             <p style="font-style: italic">
-              {{ city.main.temp_max }}°C <b-icon icon="arrow-up-right"></b-icon> | {{ city.main.temp_min }}°C <b-icon icon="arrow-down-right"></b-icon>
+              {{ city.main.temp_max }}°C
+              <b-icon icon="arrow-up-right"></b-icon> |
+              {{ city.main.temp_min }}°C
+              <b-icon icon="arrow-down-right"></b-icon>
             </p>
           </b-col>
         </b-row>
@@ -57,7 +80,6 @@ export default {
       get () {
         return this.$store.state.dataWeather
       }
-
     }
   }
 }

@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 const vuexLocalStorage = new VuexPersist({
   key: 'vuex', // The key to store the state on in the storage provider.
-  storage: window.localStorage // or window.sessionStorage or localForage
+  storage: window.sessionStorage // or window.sessionStorage or localForage
   // Function that passes the state and returns the state with only the objects you want to store.
   // reducer: state => state,
   // Function that passes a mutation and lets you decide if it should update the state in localStorage.
@@ -32,6 +32,10 @@ export default new Vuex.Store({
       state.cityList = cityList
     },
     addData (state, data) {
+      if (state.dataWeather.length === 9) { // Check the limit of 9 city
+        console.log('trop gros!!')
+        state.dataWeather.shift() // Delete the first one
+      }
       state.dataWeather.push(data)
     }
   },
