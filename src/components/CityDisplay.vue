@@ -27,9 +27,9 @@
               <small class="text-muted ml-3">
                 Récupéré le {{ weatherData.dt | filterTime }}
               </small>
-              <!-- <div class="text-right">
-                <b-button to="/detail">Détails</b-button>
-              </div> -->
+              <div class="text-right">
+                <b-button to="/details">Détails</b-button>
+              </div>
             </b-row>
           </p>
         </b-container>
