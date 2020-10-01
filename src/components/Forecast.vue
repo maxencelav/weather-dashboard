@@ -6,8 +6,39 @@
       :items="items"
       :fields="fields"
       head-variant="light"
-      class="mt-5"
-    ></b-table>
+      class="mt-5 align-middle"
+      sticky-header="500px"
+    >
+      <template v-slot:cell(highlow)="data">
+        {{ data.value.high }} <b-icon icon="arrow-up-right"></b-icon> |
+        {{ data.value.low }} <b-icon icon="arrow-down-right"></b-icon>
+      </template>
+
+      <template v-slot:cell(status)="data">
+        {{ data.value.currentStatus }}
+        <b-img
+          height="32px"
+          :src="'https://openweathermap.org/img/wn/' + data.value.icon + '.png'"
+          alt="Icône de la météo"
+        ></b-img>
+      </template>
+
+      <template v-slot:cell(humidity)="data">
+        {{ data.value.currentHumidity + '%'}}
+        <b-icon
+          v-if="data.value.currentHumidity <= 20"
+          icon="droplet"
+        ></b-icon>
+        <b-icon
+          v-else-if="data.value.currentHumidity > 20 && data.value.currentHumidity < 90"
+          icon="droplet-half"
+        ></b-icon>
+        <b-icon
+          v-else-if="data.value.currentHumidity >= 90"
+          icon="droplet-fill"
+        ></b-icon>
+      </template>
+    </b-table>
   </div>
 </template>
 
@@ -32,7 +63,7 @@ export default {
         },
         {
           key: 'highlow',
-          label: 'Extrêmes'
+          label: 'Minimale & Maximale'
         },
         {
           key: 'status',
@@ -61,11 +92,19 @@ export default {
             const result = response.data.list
             result.forEach((item) =>
               this.items.push({
-                time: moment(item.dt_txt).locale('fr').format('dddd DD MMM à HH') + 'h',
-                humidity: item.main.humidity + '%',
-                highlow: item.main.temp_min + ' - ' + item.main.temp_max,
+                time:
+                  moment(item.dt_txt).locale('fr').format('dddd DD MMM à HH') +
+                  'h',
+                humidity: { currentHumidity: item.main.humidity },
+                highlow: {
+                  high: item.main.temp_max + '°C',
+                  low: item.main.temp_min + '°C'
+                },
                 temperature: item.main.temp + '°C',
-                status: item.weather[0].description
+                status: {
+                  currentStatus: item.weather[0].description,
+                  icon: item.weather[0].icon
+                }
               })
             )
             this.cityForecast.push(response.data.list)
@@ -80,4 +119,7 @@ export default {
 </script>
 
 <style>
+.table > tbody > tr > td {
+  vertical-align: middle;
+}
 </style>
