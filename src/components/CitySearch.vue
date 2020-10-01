@@ -30,12 +30,26 @@ export default {
   },
   data () {
     return {
-      tempCity: ''
+      tempCity: '',
+      tempList: this.$store.getters.cityList
     }
   },
   methods: {
     updateSearchStore () {
       this.$store.commit('changeCity', this.tempCity)
+      this.addToList()
+    },
+    addToList () {
+      if (!this.tempList.includes(this.tempCity)) {
+        if (this.tempList.length === 9) {
+          this.tempList.shift()
+        }
+        this.tempList.push(this.tempCity.toLowerCase())
+        this.$store.commit('addCityToList', this.tempList)
+      }
+      // if (this.tempList.length === 9) {
+      // }
+      // this.tempList = [...new Set(this.tempList)]
     }
   }
 }
