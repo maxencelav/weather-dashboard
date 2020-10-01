@@ -1,5 +1,6 @@
 <template>
   <div class="weather">
+     <b-card-group columns>
     <b-card no-body v-for="(city, index) in weatherData" :key="index">
       <div class="card-header">
         Votre recherche : <code>{{ city.name }}</code>
@@ -57,6 +58,7 @@
         </b-container>
       </div>
     </b-card>
+    </b-card-group>
   </div>
 </template>
 

@@ -6,10 +6,10 @@
             jusqu'à 9 lieux simultanément."
     >
     </b-jumbotron>
-    <b-container fluid="md">
-      <b-row class="align-content-center">
-        <b-col sm="12"><CitySearch></CitySearch></b-col>
-        <b-col sm="12" class="mt-4"
+    <b-container fluid>
+      <b-row class="justify-content-md-center">
+        <b-col sm="6"><CitySearch></CitySearch></b-col>
+        <b-col sm="auto" class="mt-4"
           ><CityDisplay :cityList="currentCityList"></CityDisplay
         ></b-col>
       </b-row>
