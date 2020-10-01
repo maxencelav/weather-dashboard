@@ -70,104 +70,21 @@ export default {
   },
   watch: {
     weatherData: function (value, oldValue) {
-      this.items = [
-        {
+      for (let index = 0; index < 7; index++) {
+        this.items.push({
           isActive: true,
           hour:
-            moment(value.list[0].dt * 1000)
+            moment(value.list[index].dt * 1000)
               .locale('fr')
               .format('HH') + 'h',
-          day1: this.formatWeather(value, 0),
-          day2: this.formatWeather(value, 8),
-          day3: this.formatWeather(value, 16),
-          day4: this.formatWeather(value, 24),
-          day5: this.formatWeather(value, 32)
-        },
-        {
-          isActive: true,
-          hour:
-            moment(value.list[1].dt * 1000)
-              .locale('fr')
-              .format('HH') + 'h',
-          day1: this.formatWeather(value, 1),
-          day2: this.formatWeather(value, 9),
-          day3: this.formatWeather(value, 17),
-          day4: this.formatWeather(value, 25),
-          day5: this.formatWeather(value, 33)
-        },
-        {
-          isActive: true,
-          hour:
-            moment(value.list[2].dt * 1000)
-              .locale('fr')
-              .format('HH') + 'h',
-          day1: this.formatWeather(value, 2),
-          day2: this.formatWeather(value, 10),
-          day3: this.formatWeather(value, 18),
-          day4: this.formatWeather(value, 26),
-          day5: this.formatWeather(value, 34)
-        },
-        {
-          isActive: true,
-          hour:
-            moment(value.list[2].dt * 1000)
-              .locale('fr')
-              .format('HH') + 'h',
-          day1: this.formatWeather(value, 3),
-          day2: this.formatWeather(value, 11),
-          day3: this.formatWeather(value, 19),
-          day4: this.formatWeather(value, 27),
-          day5: this.formatWeather(value, 35)
-        },
-        {
-          isActive: true,
-          hour:
-            moment(value.list[3].dt * 1000)
-              .locale('fr')
-              .format('HH') + 'h',
-          day1: this.formatWeather(value, 4),
-          day2: this.formatWeather(value, 12),
-          day3: this.formatWeather(value, 20),
-          day4: this.formatWeather(value, 28),
-          day5: this.formatWeather(value, 36)
-        },
-        {
-          isActive: true,
-          hour:
-            moment(value.list[4].dt * 1000)
-              .locale('fr')
-              .format('HH') + 'h',
-          day1: this.formatWeather(value, 5),
-          day2: this.formatWeather(value, 13),
-          day3: this.formatWeather(value, 21),
-          day4: this.formatWeather(value, 29),
-          day5: this.formatWeather(value, 37)
-        },
-        {
-          isActive: true,
-          hour:
-            moment(value.list[5].dt * 1000)
-              .locale('fr')
-              .format('HH') + 'h',
-          day1: this.formatWeather(value, 6),
-          day2: this.formatWeather(value, 14),
-          day3: this.formatWeather(value, 22),
-          day4: this.formatWeather(value, 30),
-          day5: this.formatWeather(value, 38)
-        },
-        {
-          isActive: true,
-          hour:
-            moment(value.list[6].dt * 1000)
-              .locale('fr')
-              .format('HH') + 'h',
-          day1: this.formatWeather(value, 7),
-          day2: this.formatWeather(value, 15),
-          day3: this.formatWeather(value, 23),
-          day4: this.formatWeather(value, 31),
-          day5: this.formatWeather(value, 39)
-        }
-      ]
+          day1: this.formatWeather(value, index),
+          day2: this.formatWeather(value, index + 7),
+          day3: this.formatWeather(value, +7 * 2),
+          day4: this.formatWeather(value, +7 * 3),
+          day5: this.formatWeather(value, +7 * 4)
+        })
+      }
+
       this.$refs.table.refresh()
     }
   },
