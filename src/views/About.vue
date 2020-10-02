@@ -8,29 +8,28 @@
 
     <b-container>
       <b-card-group deck>
-        <b-card title="Alyssia">
+        <b-card title="Alyssia 🦄">
           <b-card-text>
-            Esse aliquip veniam amet fugiat in pariatur dolore enim.
+            A géré l'affichage de plusieurs villes sur la page de recherche, ainsi que la barre de recherches.
           </b-card-text>
         </b-card>
 
-        <b-card title="Florent">
-          <b-card-text> Cupidatat qui fugiat ipsum irure. </b-card-text>
+        <b-card title="Florent 🏍️">
+          <b-card-text>A converti les designs de Maxence en carte Bootstrap, ainsi que d'autres tâches sur tout le site.</b-card-text>
         </b-card>
       </b-card-group>
 
       <b-card-group deck class="mt-3">
-        <b-card title="Hugo">
+        <b-card title="Hugo 👾">
           <b-card-text>
-            Et pariatur cupidatat anim labore ullamco velit ipsum consequat
-            Lorem quis.
+            A assisté Florent dans la mise en place des cartes pour les villes.
           </b-card-text>
         </b-card>
 
         <b-card title="Maxence 🌞">
           <b-card-text>
             A aidé au design du projet, l'implémentation de la barre de
-            recherche ainsi que le tableau de prévisions.
+            recherche, le store dans le localStorage ainsi que le tableau de prévisions.
           </b-card-text>
         </b-card>
       </b-card-group>
